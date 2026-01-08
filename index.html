@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" class=""><head><script>window.livecodes = window.livecodes || {};</script><title>DeepAI Code Snippet</title><meta name="title" content="DeepAI Code Snippet"><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="./style.css"><script src="https://cdn.jsdelivr.net/npm/es-module-shims@1.10.0/dist/es-module-shims.js" async=""></script><script type="importmap">{
+  "imports": {}
+}</script></head><body>
+
+
+<meta charset="utf-8">
+<title>Three.js – Simple Cube</title>
+<style>
+  /* ----- CSS ----- */
+  html,body{margin:0;height:100%;overflow:hidden;background:#222;}
+  #c{width:100%;height:100%}
+</style>
+
+
+<div id="c"></div>
+
+<!-- Three.js from CDN -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script>
+/* ----- JavaScript ----- */
+(() => {
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({antialias:true});
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.getElementById('c').appendChild(renderer.domElement);
+
+  const geometry = new THREE.BoxGeometry();
+  const material = new THREE.MeshNormalMaterial(); // colorful by default
+  const cube = new THREE.Mesh(geometry, material);
+  scene.add(cube);
+
+  camera.position.z = 2;
+
+  // Resize handling
+  window.addEventListener('resize', () => {
+    const w = window.innerWidth, h = window.innerHeight;
+    renderer.setSize(w, h);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  });
+
+  // Animation loop
+  const animate = () => {
+    requestAnimationFrame(animate);
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+    renderer.render(scene, camera);
+  };
+  animate();
+})();
+</script>
+
+<script src="./script.js"></script></body></html>
